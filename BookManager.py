@@ -1,4 +1,5 @@
 import itertools
+import uuid
 from Book import Book
 
 class BookManager():
@@ -11,7 +12,7 @@ class BookManager():
     
     def listBooks(self, args = None):
         for key, value in self.books.items():
-	        print("ID: " + str(value.id) + "Title:" + value.title + "Price" +  str(value.price) + "Author: " + value.author)
+	        print("ID: " + str(value.id) + " Title:" + value.title + " Price" +  str(value.price) + " Author: " + value.author)
 
     def addToCart(bookId):
         print('a2')
@@ -33,10 +34,9 @@ class BookManager():
         #next((x for x in test_list if x.value == value), None)
     
     def addBook(self, bookname, bookprice, bookauthor):
-        print("adding book")
-        self.id = next(self.id_iter)
+        id = uuid.uuid4().hex
         book = Book(bookname, bookprice, bookauthor, id)
-        self.books.update({id: book})
+        self.books.update({id : book})
 
     def deleteBook(bookId):
         print('a9')
