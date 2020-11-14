@@ -5,30 +5,30 @@ class BookManager():
     pass
 
     def listBooks():
-        print('a')
+        print('a1')
 
     def addToCart(bookId):
-        print('a')
+        print('a2')
 
     def listCart():
-        print('a')
+        print('a3')
 
     def clearCart():
-        print('a')
+        print('a4')
 
     def editCart(bookId):
-        print('a')
+        print('a5')
 
     def checkout():
-        print('a')
+        print('a6')
 
     def searchBook(option, info):
-        print('a')
+        print('a7')
 
     def addBook(bookName, bookPrice, bookAuthor):
-        print('a')
+        print('a8')
 
     def deleteBook(bookId):
-        print('a')
+        print('a9')
 
         
