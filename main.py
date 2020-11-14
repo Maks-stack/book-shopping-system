@@ -7,6 +7,6 @@ def main():
 
     while (inp != "quit"):
         print('aa')
-        inp = input('\nWhat command do you want to execute?\n')
+        inp = input('What command do you want to execute?\n')
 
 main()
