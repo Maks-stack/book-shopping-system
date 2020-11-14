@@ -5,30 +5,32 @@ class BookManager():
 
     id_iter = itertools.count(1)
 
+    password = "password"
+
     def __init__(self):
-        # id1 = str(next(self.id_iter))
-        # book1 = Book('Harry Potter', '100', 'J.K.Rowling', id1)
-        # id2 = str(next(self.id_iter))
-        # book2 = Book('Harry Potter 2', '200', 'J.K.Rowling', id2)
-        # id3 = str(next(self.id_iter))
-        # book3 = Book('Harry Potter 3', '300', 'J.K.Rowling', id3)
+        id1 = str(next(self.id_iter))
+        book1 = Book('Harry Potter', '100', 'J.K.Rowling', id1)
+        id2 = str(next(self.id_iter))
+        book2 = Book('Harry Potter 2', '200', 'J.K.Rowling', id2)
+        id3 = str(next(self.id_iter))
+        book3 = Book('Harry Potter 3', '300', 'J.K.Rowling', id3)
 
-        # self.books = {
-        #     id1: book1,
-        #     id2: book2,
-        #     id3: book3
-        # }
+        self.books = {
+            id1: book1,
+            id2: book2,
+            id3: book3
+        }
 
-        # self.cart = {
-        #     id1: {
-        #         'book': book1,
-        #         'quantity': 3
-        #     },
-        #     id2: {
-        #         'book': book2,
-        #         'quantity': 2
-        #     }
-        # }
+        self.cart = {
+            id1: {
+                'book': book1,
+                'quantity': 3
+             },
+             id2: {
+                 'book': book2,
+                 'quantity': 2
+             }
+         }
 
 
     
@@ -101,25 +103,42 @@ class BookManager():
 
 
     def searchBook(self, args):
-        print('a7')
-        print(args)
-        #next((x for x in test_list if x.value == value), None)
-
-
+        searchType = args[0]
+        searchItem = args[1]
+        
+        if(searchType == "-i"):
+            self.books.get(searchItem).print_book()
+           
+        if(searchType == "-n"):
+            searchTerm = ""
+            for x in range(1, len(args)):
+                searchTerm += args[x] + " "
+            searchTerm = searchTerm[:-1]
+            
+            book = next((x for x in self.books.values() if x.title == searchTerm), None)
+            book.print_book()
+            
     def addBook(self, args):
-        print('a8')
-        #self.id = next(self.id_iter)
-        #book = Book(bookName, bookPrice, bookAuthor, self.id)
-        #self.books.append(book)
-
+        password = input('please Enter Password\n')
+        if(password == "password"):
+            self.id = next(self.id_iter)
+            book = Book(bookName, bookPrice, bookAuthor, self.id)
+            self.books.append(book)
+        else:
+            print("Wrong password")
 
     def deleteBook(self, bookId):
-        print('a9')
-        bookid = bookId[0]
-        self.books.pop(bookid)
-
-        print(bookid)
-
+        password = input('please Enter Password\n')
+        if(password == "password"):
+            bookid = bookId[0]
+            if(self.books.get(bookid)):
+                print("deleting Book: " + self.books.get(bookid).title)
+                self.books.pop(bookid)
+                self.listBooks()
+            else: 
+                print("Book not found")
+        else:
+            print("Wrong password")
     
     def notAFun(self, args = None): 
         print('This function is not a correct one')       
