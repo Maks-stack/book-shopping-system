@@ -32,8 +32,6 @@ class BookManager():
              }
          }
 
-
-    
     def listBooks(self, args = None):
         if (bool(self.books)): 
             for value in self.books.values():
@@ -104,9 +102,9 @@ class BookManager():
 
     def searchBook(self, args):
         searchType = args[0]
-        searchItem = args[1]
         
         if(searchType == "-i"):
+            searchId = args[1]
             self.books.get(searchItem).print_book()
            
         if(searchType == "-n"):
@@ -114,7 +112,6 @@ class BookManager():
             for x in range(1, len(args)):
                 searchTerm += args[x] + " "
             searchTerm = searchTerm[:-1]
-            
             book = next((x for x in self.books.values() if x.title == searchTerm), None)
             book.print_book()
             
@@ -124,6 +121,7 @@ class BookManager():
             self.id = next(self.id_iter)
             book = Book(bookName, bookPrice, bookAuthor, self.id)
             self.books.append(book)
+            self.listBooks()
         else:
             print("Wrong password")
 
