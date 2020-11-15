@@ -108,12 +108,12 @@ class BookManager():
             self.books.get(searchItem).print_book()
            
         if(searchType == "-n"):
-            searchTerm = ""
-            for x in range(1, len(args)):
-                searchTerm += args[x] + " "
-            searchTerm = searchTerm[:-1]
-            book = next((x for x in self.books.values() if x.title == searchTerm), None)
-            book.print_book()
+            args.pop(0)
+            searchTerm = ' '.join(args)
+            foundBooks = [x for x in self.books.values() if x.title == searchTerm]
+
+            for book in foundBooks:
+                book.print_book()
             
     def addBook(self, args):
         password = input('please Enter Password\n')
@@ -126,11 +126,11 @@ class BookManager():
             print("Wrong password")
 
     def deleteBook(self, bookId):
-        password = input('please Enter Password\n')
+        password = input('Please Enter Password: ')
         if(password == "password"):
             bookid = bookId[0]
-            if(self.books.get(bookid)):
-                print("deleting Book: " + self.books.get(bookid).title)
+            if bookid in self.books:
+                print("Deleting Book: " + self.books.get(bookid).title)
                 self.books.pop(bookid)
                 self.listBooks()
             else: 
