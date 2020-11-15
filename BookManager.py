@@ -1,4 +1,5 @@
 import itertools
+import shlex
 from Book import Book
 
 class BookManager():
@@ -8,29 +9,9 @@ class BookManager():
     password = "password"
 
     def __init__(self):
-        id1 = str(next(self.id_iter))
-        book1 = Book('Harry Potter', '100', 'J.K.Rowling', id1)
-        id2 = str(next(self.id_iter))
-        book2 = Book('Harry Potter 2', '200', 'J.K.Rowling', id2)
-        id3 = str(next(self.id_iter))
-        book3 = Book('Harry Potter 3', '300', 'J.K.Rowling', id3)
 
-        self.books = {
-            id1: book1,
-            id2: book2,
-            id3: book3
-        }
-
-        self.cart = {
-            id1: {
-                'book': book1,
-                'quantity': 3
-             },
-             id2: {
-                 'book': book2,
-                 'quantity': 2
-             }
-         }
+        self.books = {}
+        self.cart = {}
 
     def listBooks(self, args = None):
         if (bool(self.books)): 
@@ -116,11 +97,20 @@ class BookManager():
                 book.print_book()
             
     def addBook(self, args):
-        password = input('please Enter Password\n')
+
+        lists = ' '.join(args)
+        info = shlex.split(lists)
+        author = ""
+        
+        password = input('Please Enter Password: ')
         if(password == "password"):
-            self.id = next(self.id_iter)
-            book = Book(bookName, bookPrice, bookAuthor, self.id)
-            self.books.append(book)
+            self.id = str(next(self.id_iter))
+        
+            if len(info) == 3:
+                author = info[2]
+
+            book = Book(info[0], info[1], author, self.id)    
+            self.books[self.id] = book
             self.listBooks()
         else:
             print("Wrong password")
