@@ -19,7 +19,7 @@ class BookManager():
                 value.print_book()
         else:
             print("No books available")
-	        
+            
 
 
     def addToCart(self, bookId):
@@ -84,11 +84,11 @@ class BookManager():
     def searchBook(self, args):
         searchType = args[0]
         
-        if(searchType == "-i"):
+        if searchType == "-i":
             searchId = args[1]
-            self.books.get(searchItem).print_book()
+            self.books.get(searchId).print_book()
            
-        if(searchType == "-n"):
+        if searchType == "-n":
             args.pop(0)
             searchTerm = ' '.join(args)
             foundBooks = [x for x in self.books.values() if x.title == searchTerm]
@@ -103,7 +103,8 @@ class BookManager():
         author = ""
         
         password = input('Please Enter Password: ')
-        if(password == "password"):
+
+        if password == "password":
             self.id = str(next(self.id_iter))
         
             if len(info) == 3:
@@ -117,7 +118,7 @@ class BookManager():
 
     def deleteBook(self, bookId):
         password = input('Please Enter Password: ')
-        if(password == "password"):
+        if password == "password":
             bookid = bookId[0]
             if bookid in self.books:
                 print("Deleting Book: " + self.books.get(bookid).title)
@@ -129,4 +130,4 @@ class BookManager():
             print("Wrong password")
     
     def notAFun(self, args = None): 
-        print('This function is not a correct one')       
+        print('This function is not a correct one')
