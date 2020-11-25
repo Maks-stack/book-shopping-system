@@ -86,7 +86,10 @@ class BookManager():
         
         if searchType == "-i":
             searchId = args[1]
-            self.books.get(searchId).print_book()
+            if searchId in self.books:
+                self.books.get(searchId).print_book()
+            else:
+                print('The ID is not correct')
            
         if searchType == "-n":
             args.pop(0)
